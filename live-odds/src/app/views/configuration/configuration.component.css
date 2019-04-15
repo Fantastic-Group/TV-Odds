@@ -1,0 +1,108 @@
+﻿.configuration-component {
+  margin-bottom: 120px; }
+  .configuration-component h2.warning {
+    font-size: 14px;
+    color: #f00;
+    text-transform: none;
+    font-weight: bold;
+    margin: 10px 0;
+    display: block; }
+  .configuration-component .header-input {
+    width: 300px; }
+  .configuration-component .display-settings-label {
+    display: inline-block;
+    width: 200px; }
+  .configuration-component .error {
+    color: #f00;
+    font-size: 12px;
+    margin: 4px 8px; }
+  .configuration-component .header-input-label {
+    width: 160px;
+    display: inline-block; }
+  .configuration-component .juice {
+    display: inline-block;
+    width: 150px; }
+  .configuration-component input[type=number] {
+    width: 40px; }
+  .configuration-component input.ng-invalid {
+    border: 2px solid #f00; }
+  .configuration-component .bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    right: 0; }
+    .configuration-component .bottom .button {
+      display: inline-block;
+      width: 50%; }
+      .configuration-component .bottom .button.prev {
+        background-image: url("../../../assets/imgs/icon_left-arrow.png");
+        background-repeat: no-repeat;
+        background-position: left 10px center; }
+      .configuration-component .bottom .button.next {
+        background-image: url("../../../assets/imgs/icon_right-arrow.png");
+        background-repeat: no-repeat;
+        background-position: right 10px center; }
+    .configuration-component .bottom button {
+      padding: 10px;
+      width: 100%;
+      background-color: #43247D;
+      color: #fff;
+      height: 50px;
+      text-transform: uppercase;
+      font-size: 20px; }
+    .configuration-component .bottom button[disabled] {
+      background-color: #808080; }
+  .configuration-component .mardigras h2.warning {
+    font-size: 14px;
+    color: #f00;
+    text-transform: none;
+    font-weight: bold;
+    margin: 10px 0;
+    display: block; }
+  .configuration-component .mardigras .header-input {
+    width: 300px; }
+  .configuration-component .mardigras .display-settings-label {
+    display: inline-block;
+    width: 200px; }
+  .configuration-component .mardigras .error {
+    color: #f00;
+    font-size: 12px;
+    margin: 4px 8px; }
+  .configuration-component .mardigras .header-input-label {
+    width: 160px;
+    display: inline-block; }
+  .configuration-component .mardigras .juice {
+    display: inline-block;
+    width: 150px; }
+  .configuration-component .mardigras input[type=number] {
+    width: 40px; }
+  .configuration-component .mardigras input.ng-invalid {
+    border: 2px solid #f00; }
+  .configuration-component .mardigras .bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    right: 0; }
+    .configuration-component .mardigras .bottom .button {
+      display: inline-block;
+      width: 50%; }
+      .configuration-component .mardigras .bottom .button.prev {
+        background-image: url("../../../assets/imgs/icon_left-arrow.png");
+        background-repeat: no-repeat;
+        background-position: left 10px center; }
+      .configuration-component .mardigras .bottom .button.next {
+        background-image: url("../../../assets/imgs/icon_right-arrow.png");
+        background-repeat: no-repeat;
+        background-position: right 10px center; }
+    .configuration-component .mardigras .bottom button {
+      padding: 10px;
+      width: 100%;
+      background-color: #43247D;
+      color: #fff;
+      height: 50px;
+      text-transform: uppercase;
+      font-size: 20px; }
+    .configuration-component .mardigras .bottom button[disabled] {
+      background-color: #808080; }

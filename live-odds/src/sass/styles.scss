@@ -1,0 +1,673 @@
+﻿@import './_variables.scss';
+
+body {
+	margin: 0;
+	font-family: 'Roboto';
+}
+
+live-odds {
+	.theme {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+}
+
+.hide {
+	display: none;
+}
+
+.show {
+	display: block;
+}
+
+.configuration-component {
+	padding: 0 20px;
+}
+
+@mixin theme($colors) {
+	body {
+		background-color: map-get($colors, page-bg);
+	}
+
+	.theme {
+		background-color: map-get($colors, page-bg);
+		font-family: 'Roboto';
+		padding: 0 10px;
+		color: map-get($colors,secondary);
+	}
+
+	.sport-icon {
+		height: 88px;
+		width: 88px;
+		margin-right: 5px;
+		display: inline-block;
+		background-color: map-get($colors, icon-color);
+	}
+
+	h1 {
+		color: map-get($colors,h1);
+		margin: 0;
+		font-size: 132px;
+		text-transform: uppercase;
+	}
+
+	h2 {
+		color: map-get($colors,h2);
+		font-weight: 300;
+		margin-top: 0;
+		margin-bottom: 0;
+		text-transform: uppercase;
+		font-size: 80px;
+		display: inline-block;
+		vertical-align: middle;
+		font-weight: 500;
+	}
+
+	.matchup-time {
+		font-size: 50px;
+		font-weight: 400;
+		color: map-get($colors,h1);
+		text-transform: uppercase;
+		vertical-align: middle;
+	}
+
+	h3 {
+		color: map-get($colors,h1);
+		margin: 0;
+		font-size: 100px;
+		text-transform: uppercase;
+	}
+
+	.pages {
+		float: right;
+		font-size: 40px;
+		color: map-get($colors, page-number-text);
+		padding-top: 40px;
+
+		span {
+			font-size: 30px;
+		}
+	}
+
+	.prop-game {
+		margin-bottom: 50px;
+
+		.game-day {
+			margin-bottom: 0 !important;
+		}
+
+		h2 {
+			margin-bottom: 5px;
+		}
+	}
+
+	.props {
+		.odd {
+			width: 570px !important;
+		}
+
+		.sport-icon {
+			margin-right: 30px;
+		}
+	}
+
+	.odds-display {
+		width: 100%;
+
+		.odds-board {
+			table-layout: fixed;
+
+			.name {
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				display: block;
+			}
+		}
+
+		.game-day {
+			font-size: 110px;
+			background-color: map-get($colors,table-border);
+			margin-bottom: 15px;
+			font-weight: 500;
+
+			.date-time, .prop-header-text {
+				background-color: map-get($colors,game-date-bg);
+				color: map-get($colors,game-date-text);
+				padding: 10px;
+				font-size: 80px;
+				text-transform: uppercase;
+			}
+
+			table {
+				border: 2px solid map-get($colors,table-border);
+				border-collapse: collapse;
+				width: 100%;
+
+				&.props-board {
+					margin-bottom: 0;
+				}
+			}
+
+			table {
+				border-collapse: initial;
+				border-spacing: 1px;
+
+				thead {
+					tr {
+						th {
+							border: 0;
+							letter-spacing: normal !important;
+						}
+					}
+				}
+
+				tbody {
+					tr {
+						td {
+							border: 0;
+						}
+					}
+				}
+			}
+
+			tbody {
+				border: 5px solid map-get($colors,table-border);
+
+
+				tr, td {
+					border: 1px solid map-get($colors,table-border);
+				}
+
+				.id, .odd, .time {
+					letter-spacing: -6px;
+				}
+
+				.morespace {
+					font-size: 80%;
+
+					&.id {
+						font-size: 70%;
+					}
+				}
+
+				.id {
+					background-color: map-get($colors,betnum-bg);
+					color: map-get($colors,betnum-text);
+				}
+
+				.even-row {
+					background-color: map-get($colors,row-even-bg);
+					color: map-get($colors,row-text);
+				}
+
+				.odd-row {
+					background-color: map-get($colors,row-odd-bg);
+					color: map-get($colors,row-text);
+
+					.id {
+						background-color: map-get($colors,betnum-bg-odd);
+					}
+				}
+
+				.time {
+					background-color: map-get($colors,game-time-bg);
+					color: map-get($colors,game-time-text);
+
+					&.changed {
+						color: map-get($colors,game-time-change);
+					}
+				}
+			}
+
+
+			tr {
+				position: relative;
+				z-index: 1;
+				//height:100px;
+				td {
+					padding: 10px;
+					text-align: center;
+				}
+
+				-webkit-column-break-inside: avoid;
+				-moz-column-break-inside: avoid;
+				-o-column-break-inside: avoid;
+				-ms-column-break-inside: avoid;
+				column-break-inside: avoid;
+			}
+
+			.id, .time {
+				padding: 0;
+				text-align: center;
+			}
+
+			.odd {
+				width: 310px;
+				white-space: nowrap;
+				padding: 0;
+
+				.sub-text {
+					display: none;
+				}
+
+				.value {
+					text-align: center;
+				}
+
+				.symbol {
+					padding-right: 10px;
+				}
+
+				&.show-juice {
+					text-align: left;
+
+
+					.sub-text {
+						display: inline-block;
+						font-size: 60px;
+						width: auto;
+						padding-left: 30px;
+						padding-top: 30px;
+						padding-right: 10px;
+					}
+
+					.value {
+						display: inline-block;
+						font-size: 110px;
+						padding-left: 10px;
+					}
+
+					.symbol {
+						font-size: 68px;
+						width: 54px;
+						display: inline-block;
+						padding: 0;
+
+						&.sub {
+							font-size: 106px;
+						}
+
+						&.plus {
+							font-size: 100px;
+						}
+					}
+
+					&.overunder.morespace {
+						.value {
+							font-size: 96px;
+							padding-left: 0;
+						}
+
+						.symbol {
+							width: 42px;
+							font-size: 56px;
+						}
+					}
+				}
+
+				.value {
+					text-align: center;
+				}
+
+				&.status {
+					white-space: normal !important;
+				}
+			}
+
+			.id {
+				width: 240px;
+			}
+
+			.time {
+				width: 140px;
+				font-size: 60px;
+			}
+
+			.name-col {
+				text-align: left;
+				width: 764px;
+
+				.sub-text {
+					display: block;
+					padding: 0;
+					text-align: left;
+					width: 100%;
+				}
+
+				.venuechange {
+					position: absolute;
+					z-index: 999999999999;
+					background-color: map-get($colors, game-alert-bg);
+					color: map-get($colors, game-alert-text);
+					display: block;
+					margin-top: -27px;
+					margin-left: 0;
+					padding: 5px 10px;
+					font-size: 32px;
+					margin-right: 0;
+				}
+
+				&.show-juice {
+					font-size: 74px;
+					width: 450px;
+					text-align: left;
+				}
+			}
+
+
+			.sub-text {
+				font-size: 40px;
+				color: map-get($colors, juice-text);
+				text-align: center;
+				width: 40%;
+				display: inline-block;
+			}
+
+			thead {
+				background-color: map-get($colors,table-header-bg);
+
+				th {
+					border: 0 solid map-get($colors,table-border);
+					color: map-get($colors,table-header-text);
+					text-transform: uppercase;
+					height: 88px;
+					text-align: center;
+					font-weight: 500;
+					font-size: 70px !important;
+					padding: 0 10px;
+
+					&.show-juice.odd {
+						text-align: center !important;
+					}
+				}
+			}
+		}
+	}
+
+	.horizontal {
+		max-height: 3840px;
+	}
+
+	.horizontal-display {
+		display: flex;
+		justify-content: space-between;
+
+		.col {
+			width: 1904px;
+			display: inline-block;
+		}
+	}
+}
+
+@include theme($colors);
+
+@import './_theme.scss';
+
+.hd-setting {
+
+	.theme {
+		padding: 0 5px;
+	}
+
+	.sport-icon {
+		height: 48px;
+		width: 48px;
+		margin-right: 0;
+	}
+
+	.props {
+		.odd {
+			width: 285px !important;
+		}
+
+		.sport-icon {
+			margin-right: 15px;
+		}
+	}
+
+	h1 {
+		font-size: 66px;
+	}
+
+	h2 {
+		margin-top: 0;
+		font-size: 40px;
+		margin-bottom: 0;
+	}
+
+	.matchup-time {
+		font-size: 25px;
+	}
+
+	h3 {
+		font-size: 50px;
+	}
+
+	.pages {
+		float: right;
+		font-size: 20px;
+		padding-top: 20px;
+
+		span {
+			font-size: 15px;
+		}
+	}
+
+	.prop-game {
+		margin-bottom: 25px;
+
+		h2 {
+			display: block;
+		}
+	}
+
+	.odds-display {
+
+		.game-day {
+			font-size: 55px;
+			font-weight: 500;
+
+			.date-time, .prop-header-text {
+				padding: 5px;
+				font-size: 40px;
+			}
+
+			table {
+				border-width: 1px;
+
+				&.props-board {
+				}
+			}
+
+
+
+			tbody {
+				//border-width: 2px;
+				.id, .odd, .time {
+					letter-spacing: -3px;
+				}
+			}
+
+			tr {
+
+				td {
+					padding: 0 5px;
+				}
+			}
+
+			.odd {
+				width: 155px;
+				white-space: nowrap;
+				padding: 0;
+
+				.sub-text {
+					display: none;
+				}
+
+				.symbol {
+					padding-right: 10px;
+				}
+
+				&.show-juice {
+
+
+					.sub-text {
+						font-size: 33px;
+						padding-top: 15px;
+						padding-right: 5px;
+						padding-left: 10px;
+						display: inline-block;
+
+						&.morespace {
+							font-size: 30px;
+						}
+					}
+
+					.value {
+						font-size: 55px;
+						padding-left: 5px;
+					}
+
+					.symbol {
+						font-size: 34px;
+						width: 27px;
+						display: inline-block;
+						padding: 0;
+
+						&.sub {
+							font-size: 53px;
+						}
+
+						&.plus {
+							font-size: 50px;
+						}
+					}
+
+					&.overunder.morespace {
+						.value {
+							font-size: 48px;
+							padding-left: 0;
+						}
+
+						.symbol {
+							width: 21px;
+							font-size:28px;
+						}
+					}
+				}
+			}
+
+			.id {
+				//width: 80px;
+				width: 120px;
+			}
+
+			.time {
+				/*width: 80px;*/
+				width: 70px;
+				font-size: 30px;
+			}
+
+			.name-col {
+				width: 382px;
+
+				&.show-juice {
+					font-size: 37px;
+					width: 225px;
+					text-align: left;
+				}
+
+				.venuechange {
+					margin-top: -13.5px;
+					margin-left: 0;
+					padding: 2px 5px;
+					font-size: 16px;
+					margin-right: 0;
+				}
+			}
+
+
+
+			thead {
+				tr {
+					height: 44px;
+
+					th {
+						height: 44px;
+						font-size: 35px !important;
+						letter-spacing: 0 !important;
+						padding: 0 5px;
+
+						&.time {
+							font-size: 27px !important;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.horizontal {
+		max-height: 1080px;
+	}
+
+	.horizontal-display .col {
+		width: 952px;
+	}
+}
+
+.configuration-component {
+	.left-sec {
+		float: left;
+	}
+}
+
+.preview {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 99999999;
+	background-color: rgba(0,0,0,.5);
+	height: 1920px;
+
+	[live-odds] {
+		zoom: 80%;
+		position: absolute;
+	}
+
+	.close {
+		z-index: 9999999999999;
+		position: relative;
+		float: right;
+		height: 30px;
+	}
+
+	.live-odds-component {
+		top: 0;
+		right: 0;
+		left: 0;
+
+
+		&.settings4k {
+			zoom: 60%;
+		}
+
+		&.Vertical {
+			zoom: 80%;
+			width: 1080px;
+			left: 666px;
+			height: 1920px;
+
+			&.settings4k {
+				width: 100%;
+				left: 0;
+				height: 4000px;
+			}
+		}
+	}
+}

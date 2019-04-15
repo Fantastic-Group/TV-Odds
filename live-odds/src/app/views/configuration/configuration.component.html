@@ -1,0 +1,158 @@
+<div class="hd-setting configuration-component">
+	<h1 style="white-space:nowrap">Odds Display Board Settings</h1>
+	<div class="" [formGroup]="configForm">
+		<h2 class="warning">Warning: Closing this page will prevent the odds displays from receiving updated game and bet details. This window should be left open at all times.</h2>
+		<h2 class="warning">FOR VENUE CHANGE - "venue:NEWVENUE" FOR PITCHERS - HOME "hpitcher:Chris Sale" - AWAY - "apitcher:Justin Verlander". <br />MULTIPLE FIELDS CAN BE SEPARATED BY "/"</h2>
+		<div>
+			Page Refresh (sec):
+			<input type="number" formControlName="refresh" min="5" max="999" required />
+			<div *ngIf="configForm.get('refresh').touched && configForm.get('refresh').invalid" class="error">
+				<div *ngIf="configForm.get('refresh').errors.required">* Page Refresh is required.</div>
+				<div *ngIf="configForm.get('refresh').errors.min">* Minimum refresh is 5 seconds.</div>
+				<div *ngIf="configForm.get('refresh').errors.max">* Maximum refresh is 999 seconds.</div>
+			</div>
+		</div>
+		<div>
+			<button (click)="forceDisplayReload()">Force Displays to Reload</button>
+		</div>
+		<div>
+			<button (click)="resetSelections()">CLEAR Selections for All Displays</button>
+		</div>
+
+
+		<div *ngIf="model.oddsDisplays.length > 0">
+
+			<h1 #target style="float:left;">Display {{model.oddsDisplays[currentDisplayIndex].displayNumber}} </h1>
+			<div style="float:left;padding-left:20px;padding-top:20px;padding-bottom:20px;">
+				<button (click)="resetSelections(currentDisplayIndex)">CLEAR Display {{model.oddsDisplays[currentDisplayIndex].displayNumber}}</button>
+				<div><button (click)="preview()">Show Preview</button></div>
+				<div>URL (.../#/display?screen={{model.oddsDisplays[currentDisplayIndex].displayNumber}}) <a href="/#/display?screen={{model.oddsDisplays[currentDisplayIndex].displayNumber}}" target="_blank">OPEN DISPLAY SCREEN {{model.oddsDisplays[currentDisplayIndex].displayNumber}}</a></div>
+			</div>
+			<div style="clear:both;">
+				<label>
+					<span class="display-settings-label">
+						Orientation:
+					</span>
+					<select [ngModelOptions]="{standalone: true}" [(ngModel)]='model.oddsDisplays[currentDisplayIndex].orientation'>
+						<option *ngFor="let item of orientations()" [value]="orientation[item]">{{item}}</option>
+					</select>
+				</label>
+			</div>
+			<div>
+				<label>
+					<span class="display-settings-label">
+						Display Setting:
+					</span>
+					<select [ngModelOptions]="{standalone: true}" [(ngModel)]="model.oddsDisplays[currentDisplayIndex].HDDisplay">
+						<option [ngValue]="true">1920 x 1080</option>
+						<option [ngValue]="false">4K</option>
+					</select>
+				</label>
+			</div>
+			<div>
+				<label>
+					<span class="display-settings-label">
+						<input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="model.oddsDisplays[currentDisplayIndex].override" (click)="overrideRefresh(model.oddsDisplays[currentDisplayIndex])" />
+						Override Refresh (sec):
+					</span>
+					<input type="number" formControlName="refreshOverride" [(ngModel)]="model.oddsDisplays[currentDisplayIndex].refreshOverride" [disabled]="!model.oddsDisplays[currentDisplayIndex].override" max="999" min="5" />
+				</label>
+				<div *ngIf="configForm.get('refreshOverride').touched && configForm.get('refreshOverride').invalid" class="error">
+					<div *ngIf="configForm.get('refreshOverride').errors.required">* Page Refresh is required.</div>
+					<div *ngIf="configForm.get('refreshOverride').errors.min">* Minimum refresh is 5 seconds.</div>
+					<div *ngIf="configForm.get('refreshOverride').errors.max">* Maximum refresh is 999 seconds.</div>
+				</div>
+			</div>
+			<h3>Sports</h3>
+			<div *ngFor="let sport of sports">
+				<label>
+					<input type="checkbox" (change)="selectSport(model.oddsDisplays[currentDisplayIndex], sport)" [checked]="oddsDisplayHasSport(model.oddsDisplays[currentDisplayIndex], sport)" />{{sport.SportName}}
+				</label>
+				<div *ngIf="oddsDisplayHasSport(model.oddsDisplays[currentDisplayIndex], sport)" style="margin-left: 20px">
+					<div *ngFor="let league of leagues[sport.SportID]">
+						<label>
+							<input type="checkbox" (change)="selectLeague(model.oddsDisplays[currentDisplayIndex], sport, league)" [checked]="oddsDisplayHasLeague(model.oddsDisplays[currentDisplayIndex], sport, league)">{{league.LeagueName}}
+						</label>
+						<div *ngIf="oddsDisplayHasLeague(model.oddsDisplays[currentDisplayIndex], sport, league)" style="margin-left: 40px">
+							<div *ngIf="games[league.LeagueID] != null">
+								<div class="league-options">
+
+									<div>
+										<label><span class="header-input-label">Display Header:</span> <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="getSelectedLeague(model.oddsDisplays[currentDisplayIndex], sport, league).header" class="header-input" maxlength="50" /></label>
+									</div>
+									<div>
+										<label><span class="header-input-label">Display Sub-Header:</span> <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="getSelectedLeague(model.oddsDisplays[currentDisplayIndex], sport, league).subHeader" class="header-input" maxlength="50" /></label>
+									</div>
+									<div>
+										<span class="header-input-label">Betting Style:</span>
+										<label><input type="radio" name="{{'betStyle_' + league.LeagueID }}" [ngModelOptions]="{standalone: true}" [(ngModel)]="getSelectedLeague(model.oddsDisplays[currentDisplayIndex], sport, league).betStyle" [value]="1" [disabled]="!hasDefaultStandardBets(sport)" />Standard</label>
+										<label><input type="radio" name="{{'betStyle_' + league.LeagueID }}" [ngModelOptions]="{standalone: true}" [(ngModel)]="getSelectedLeague(model.oddsDisplays[currentDisplayIndex], sport, league).betStyle" [value]="2" (click)="loadBetList(model.oddsDisplays[currentDisplayIndex], sport, league)" />Prop Bets/Futures</label>
+									</div>
+									<div *ngIf="!disableJuice(model.oddsDisplays[currentDisplayIndex], sport, league)">
+										<span class="header-input-label">Show Juice:</span>
+										<label class="juice"><input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="getSelectedLeague(model.oddsDisplays[currentDisplayIndex], sport, league).overUnderShowJuice" />Over/Under</label>
+										<label class="juice"><input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="getSelectedLeague(model.oddsDisplays[currentDisplayIndex], sport, league).spreadShowJuice" />Spread</label>
+									</div>
+									<div *ngIf="getSelectedLeague(model.oddsDisplays[currentDisplayIndex], sport, league).betStyle ==2">
+										<label class="juice"><input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="getSelectedLeague(model.oddsDisplays[currentDisplayIndex], sport, league).futures" />Futures</label>
+									</div>
+								</div>
+								<div class="league-games">
+									<div><label>Games:</label></div>
+									<div>
+										<label>
+											<input type="checkbox" (change)="selectAllGames(model.oddsDisplays[currentDisplayIndex], sport, league)" [ngModelOptions]="{standalone: true}" [(ngModel)]="getSelectedLeague(model.oddsDisplays[currentDisplayIndex], sport, league).selectAllGames" /> Select All Games
+										</label>
+									</div>
+									<div *ngFor="let game of games[league.LeagueID]">
+										<label>
+											<input type="checkbox" (change)="selectGame(model.oddsDisplays[currentDisplayIndex], sport, league, game)" [checked]="oddsDisplayHasGame(model.oddsDisplays[currentDisplayIndex], sport, league, game)">
+											{{game.AwayRotationNum > 0 ? (game.AwayRotationNum | number : '3.0-0' | noComma) : ''}} {{game.AwayTeamName}} @ {{game.AwayRotationNum > 0 ? (game.HomeRotationNum | number : '3.0-0' | noComma) : ''}} {{game.HomeTeamName}}, {{game.ActualDate | date: 'short' }}
+										</label>
+									</div>
+									<div *ngIf="hasSelectedGamesForLeague(model.oddsDisplays[currentDisplayIndex], sport, league)">
+
+										<div *ngIf="getSelectedLeague(model.oddsDisplays[currentDisplayIndex], sport, league).betStyle == 2 && (betList[league.LeagueID] == null || betList[league.LeagueID].length == 0)">
+											No Prop Bets Available at this time
+										</div>
+										<div style="margin-left: 60px; overflow-y: scroll; height: 300px; width: 600px; background: #eee" *ngIf="showPropBets(model.oddsDisplays[currentDisplayIndex], sport, league)">
+											<div *ngFor="let bet of betList[league.LeagueID] | groupBy: 'BetTypeID'">
+												<label>
+													<input type="checkbox" (change)="selectBetList(model.oddsDisplays[currentDisplayIndex], sport, league, bet.key)" [checked]="oddsDisplayHasBet(model.oddsDisplays[currentDisplayIndex], sport, league, bet.key)">
+													{{bet.value[0].BetName}} ({{bet.value[0].BetCode}})
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="bottom">
+				<div *ngIf="model.oddsDisplays.length > 0">
+					<button class="prev button" (click)="previousOddsDisplay(target)" [disabled]="currentDisplayIndex==0">
+						{{ currentDisplayIndex == 0 ? '&nbsp;' : 'Display ' + model.oddsDisplays[currentDisplayIndex-1].displayNumber}}
+					</button>
+					<button class="next button" (click)="nextOddsDisplay(target)" [disabled]="currentDisplayIndex == model.oddsDisplays.length-1">
+						{{ currentDisplayIndex == model.oddsDisplays.length-1 ? '&nbsp;' : 'Display ' + model.oddsDisplays[currentDisplayIndex +1].displayNumber}}
+					</button>
+				</div>
+				<div class="save-config-button">
+					<button (click)="saveConfiguration()" [disabled]="this.configurationService.isSaving">
+						{{ this.configurationService.isSaving ? "Saving, Please wait..." : "Save and Run Configuration" }}
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal preview" [ngClass]="{'hide':!showPreview, 'show':showPreview}">
+	<spinner *ngIf="this.configurationService.isSaving"></spinner>
+	<div *ngIf="!this.configurationService.isSaving">
+		<button class="close" (click)="showPreview=false">CLOSE</button>
+		<live-odds class="live-odds-component {{orientation[model.oddsDisplays[currentDisplayIndex].orientation]}}" [ngClass]="{'settings4k': !model.oddsDisplays[currentDisplayIndex].HDDisplay}" [previewDisplay]="this.configurationService.previewDisplay"></live-odds>
+	</div>
+</div>

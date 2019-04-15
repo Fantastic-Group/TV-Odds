@@ -1,0 +1,91 @@
+@import '../../../sass/_variables.scss';
+
+.configuration-component {
+    margin-bottom: 120px;
+
+    @mixin theme($colors) {
+        h2.warning {
+            font-size: 14px;
+            color: map-get($colors, error);
+            text-transform: none;
+            font-weight: bold;
+            margin: 10px 0;
+			display:block;
+        }
+
+        .header-input {
+            width: 300px;
+        }
+
+        .display-settings-label {
+            display: inline-block;
+            width: 200px;
+        }
+
+        .error {
+            color: map-get($colors, error);
+            font-size: 12px;
+            margin: 4px 8px;
+        }
+
+        .header-input-label {
+            width: 160px;
+            display: inline-block;
+        }
+
+        .juice {
+            display: inline-block;
+            width: 150px;
+        }
+
+        input[type=number] {
+            width: 40px;
+        }
+
+        input.ng-invalid {
+            border: 2px solid map-get($colors, error);
+        }
+
+        .bottom {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            left: 0;
+            right: 0;
+
+            .button {
+                display: inline-block;
+                width: 50%;
+
+                &.prev {
+                    background-image: url('../../../assets/imgs/icon_left-arrow.png');
+                    background-repeat: no-repeat;
+                    background-position: left 10px center;
+                }
+
+                &.next {
+                    background-image: url('../../../assets/imgs/icon_right-arrow.png');
+                    background-repeat: no-repeat;
+                    background-position: right 10px center;
+                }
+            }
+
+            button {
+                padding: 10px;
+                width: 100%;
+                background-color: #43247D;
+                color: #fff;
+                height: 50px;
+                text-transform: uppercase;
+                font-size: 20px;
+            }
+
+            button[disabled] {
+                background-color: #808080;
+            }
+        }
+    }
+
+    @include theme($colors);
+    @import '../../../sass/_theme.scss';
+}

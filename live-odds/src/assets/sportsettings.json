@@ -1,0 +1,670 @@
+{
+	"Casino": "wheeling",
+	"NonTeamSports": [ 1, 4, 5, 9, 10 ],
+	"StandardBetNames": [
+		{
+			"BetName": "game moneyline",
+			"BetType": 2
+		},
+		{
+			"BetName": "final result 1x2",
+			"BetType": 2
+		},
+		{
+			"BetName": "moneyline",
+			"BetType": 2
+		},
+		{
+			"BetName": "final result 3-way",
+			"BetType": 2
+		},
+		{
+			"BetName": "final result - including overtime",
+			"BetType": 2
+		},
+		{
+			"BetName": "final result 2way",
+			"BetType": 2
+		},
+		{
+			"BetName": "Which team will win the match including overtime",
+			"BetType": 2
+		},
+		{
+			"BetName": "Final Result 90 MIN + INJ",
+			"BetType": 2
+		},
+		{
+			"BetName": "Final Result",
+			"BetType": 2
+		},
+
+		{
+			"BetName": "game pointspread",
+			"BetType": 1
+		},
+		{
+			"BetName": "handicap",
+			"BetType": 1
+		},
+		{
+			"BetName": "handicap, including overtime",
+			"BetType": 1
+		},
+		{
+			"BetName": "handicap - including overtime",
+			"BetType": 1
+		},
+		{
+			"BetName": "final result-handicap",
+			"BetType": 1
+		},
+		{
+			"BetName": "game puck line",
+			"BetType": 1
+		},
+		{
+			"BetName": "game total",
+			"BetType": 4
+		},
+
+		{
+			"BetName": "under/over",
+			"BetType": 4
+		},
+		{
+			"BetName": "total points",
+			"BetType": 4
+		},
+		{
+			"BetName": "total for whole match, incl. overtime",
+			"BetType": 4
+		},
+		{
+			"BetName": "rounds under/over",
+			"BetType": 4
+		},
+		{
+			"BetName": "total for whole match, including overtime",
+			"BetType": 4
+		},
+			{
+				"BetName": "total goals",
+				"BetType": 4
+			}
+			
+	],
+	"Bets": [
+		{
+			"SportId": 2,
+			"BetTypes": [
+
+				{
+					"BetType": "MoneyLine",
+					"ID": 1,
+					"Display": "Money"
+				},
+				{
+					"BetType": "Spread",
+					"ID": 94,
+					"Display": "Spread"
+
+				},
+				{
+					"BetType": "OverUnder",
+					"ID": 20,
+					"Display": "Total"
+				}
+			]
+		},
+		{
+			"SportId": 3,
+			"BetTypes": [
+				{
+					"BetType": "Spread",
+					"ID": 94,
+					"Display": "Spread"
+
+				},
+				{
+					"BetType": "OverUnder",
+					"ID": 93,
+					"Display": "Total"
+				},
+				{
+					"BetType": "MoneyLine",
+					"ID": 92,
+					"Display": "Money"
+				}
+			]
+		},
+		{
+			"SportId": 5,
+			"BetTypes": [
+				{
+					"BetType": "Spread",
+					"ID": 84,
+					"Display": "Spread"
+				},
+				{
+					"BetType": "MoneyLine",
+					"ID": 82,
+					"Display": "Money"
+				},
+				{
+					"BetType": "OverUnder",
+					"ID": 83,
+					"Display": "Total"
+				}
+			]
+		},
+		{
+			"SportId": 6,
+			"BetTypes": [
+				{
+					"BetType": "MoneyLine",
+					"ID": 72,
+					"Display": "Money"
+				},
+				{
+					"BetType": "OverUnder",
+					"ID": 23,
+					"Display": "Total"
+				},
+				{
+					"BetType": "Spread",
+					"ID": 71,
+					"Display": "Goal"
+				}
+			]
+		},
+		{
+			"SportId": 7,
+			"BetTypes": [
+
+				{
+					"BetType": "MoneyLine",
+					"ID": 82,
+					"Display": "Money"
+				},
+				{
+					"BetType": "OverUnder",
+					"ID": 83,
+					"Display": "Total"
+				},
+				{
+					"BetType": "Spread",
+					"ID": 84,
+					"Display": "Run"
+				}
+			]
+		},
+		{
+			"SportId": 8,
+			"BetTypes": [
+				{
+					"BetType": "Spread",
+					"ID": 94,
+					"Display": "Spread"
+
+				},
+				{
+					"BetType": "OverUnder",
+					"ID": 93,
+					"Display": "Total"
+				},
+				{
+					"BetType": "MoneyLine",
+					"ID": 92,
+					"Display": "Money"
+				}
+			]
+		},
+		{
+			"SportId": 1047,
+			"BetTypes": [
+
+				{
+					"BetType": "MoneyLine",
+					"ID": 92,
+					"Display": "Money"
+				}
+			]
+		},
+		{
+			"SportId": 1008,
+			"BetTypes": [
+
+				{
+					"BetType": "MoneyLine",
+					"ID": 92,
+					"Display": "Money"
+				}
+			]
+		},
+		{
+			"SportId": 11,
+			"BetTypes": [
+
+				{
+					"BetType": "OverUnder",
+					"ID": 93,
+					"Display": "Total"
+				},
+				{
+					"BetType": "MoneyLine",
+					"ID": 92,
+					"Display": "Money"
+				}
+			]
+		},
+		{
+			"SportId": 1026,
+			"BetTypes": [
+
+				{
+					"BetType": "OverUnder",
+					"ID": 93,
+					"Display": "Total"
+				},
+				{
+					"BetType": "MoneyLine",
+					"ID": 92,
+					"Display": "Money"
+				}
+			]
+		},
+			{
+				"SportId": 1008,
+				"BetTypes": [
+
+					{
+						"BetType": "MoneyLine",
+						"ID": 92,
+						"Display": "Money"
+					}
+				]
+			}
+		
+	],
+	"Statuses": [
+		{
+			"ID": 0,
+			"Display": "PRE",
+			"Ignore": false
+		},
+		{
+			"ID": 1,
+			"Display": "1ST P",
+			"Ignore": false
+		},
+		{
+			"ID": 2,
+			"Display": "2ND P",
+			"Ignore": false
+		},
+		{
+			"ID": 3,
+			"Display": "3RD P",
+			"Ignore": false
+		},
+		{
+			"ID": 4,
+			"Display": "4TH P"
+		},
+		{
+			"ID": 5,
+			"Display": "5TH P"
+		},
+		{
+			"ID": 6,
+			"Display": "1H",
+			"Ignore": false
+		},
+		{
+			"ID": 7,
+			"Display": "2H",
+			"Ignore": false
+		},
+		{
+			"ID": 8,
+			"Display": "First Set",
+			"Ignore": true
+		},
+		{
+			"ID": 9,
+			"Display": "Second Set",
+			"Ignore": true
+		},
+		{
+			"ID": 10,
+			"Display": "Third Set",
+			"Ignore": true
+		},
+		{
+			"ID": 11,
+			"Display": "Fourth Set",
+			"Ignore": true
+		},
+		{
+			"ID": 12,
+			"Display": "Fifth Set",
+			"Ignore": true
+		},
+		{
+			"ID": 13,
+			"Display": "1ST Q",
+			"Ignore": false
+		},
+		{
+			"ID": 14,
+			"Display": "2ND Q",
+			"Ignore": false
+		},
+		{
+			"ID": 15,
+			"Display": "3RD Q",
+			"Ignore": false
+		},
+		{
+			"ID": 16,
+			"Display": "4TH Q",
+			"Ignore": false
+		},
+		{
+			"ID": 17,
+			"Display": "Golden Set",
+			"Ignore": true
+		},
+		{
+			"ID": 20,
+			"Display": "Started",
+			"Ignore": true
+		},
+		{
+			"ID": 22,
+			"Display": "About to start",
+			"Ignore": true
+		},
+		{
+			"ID": 30,
+			"Display": "Break",
+			"Ignore": true
+		},
+		{
+			"ID": 31,
+			"Display": "HT",
+			"Ignore": false
+		},
+		{
+			"ID": 32,
+			"Display": "Awaiting extra time",
+			"Ignore": true
+		},
+		{
+			"ID": 33,
+			"Display": "Extra time halftime",
+			"Ignore": true
+		},
+		{
+			"ID": 34,
+			"Display": "Awaiting penalties",
+			"Ignore": true
+		},
+		{
+			"ID": 40,
+			"Display": "OT",
+			"Ignore": false
+		},
+		{
+			"ID": 41,
+			"Display": "1st extra time",
+			"Ignore": true
+		},
+		{
+			"ID": 42,
+			"Display": "2nd extra time",
+			"Ignore": true
+		},
+		{
+			"ID": 50,
+			"Display": "Penalty shootout",
+			"Ignore": true
+		},
+		{
+			"ID": 51,
+			"Display": "Penalties",
+			"Ignore": true
+		},
+		{
+			"ID": 60,
+			"Display": "PPD",
+			"Ignore": false
+		},
+		{
+			"ID": 61,
+			"Display": "DELAY",
+			"Ignore": false
+		},
+		{
+			"ID": 70,
+			"Display": "Cancelled",
+			"Ignore": true
+		},
+		{
+			"ID": 80,
+			"Display": "Interrupted",
+			"Ignore": true
+		},
+		{
+			"ID": 81,
+			"Display": "Suspended",
+			"Ignore": true
+		},
+		{
+			"ID": 90,
+			"Display": "Abandoned",
+			"Ignore": true
+		},
+		{
+			"ID": 91,
+			"Display": "Walkover",
+			"Ignore": true
+		},
+		{
+			"ID": 92,
+			"Display": "Retired",
+			"Ignore": true
+		},
+		{
+			"ID": 97,
+			"Display": "Home team defaulted",
+			"Ignore": true
+		},
+		{
+			"ID": 98,
+			"Display": "Visitor team defaulted",
+			"Ignore": true
+		},
+		{
+			"ID": 100,
+			"Display": "FINAL",
+			"Ignore": false
+		},
+		{
+			"ID": 110,
+			"Display": "Ended after overtime",
+			"Ignore": false
+		},
+		{
+			"ID": 120,
+			"Display": "Ended after penalty shootout",
+			"Ignore": true
+		},
+		{
+			"ID": 130,
+			"Display": "After Golden Set",
+			"Ignore": true
+		},
+		{
+			"ID": 141,
+			"Display": "First Map",
+			"Ignore": true
+		},
+		{
+			"ID": 142,
+			"Display": "Second Map",
+			"Ignore": true
+		},
+		{
+			"ID": 143,
+			"Display": "Third Map",
+			"Ignore": true
+		},
+		{
+			"ID": 144,
+			"Display": "Fourth Map",
+			"Ignore": true
+		},
+		{
+			"ID": 145,
+			"Display": "Fifth Map",
+			"Ignore": true
+		},
+		{
+			"ID": 146,
+			"Display": "Sixth Map",
+			"Ignore": true
+		},
+		{
+			"ID": 147,
+			"Display": "Seventh Map",
+			"Ignore": true
+		},
+		{
+			"ID": 441,
+			"Display": "Sixth Set",
+			"Ignore": true
+		},
+		{
+			"ID": 442,
+			"Display": "Seventh Set",
+			"Ignore": true
+		},
+		{
+			"ID": 445,
+			"Display": "Session break",
+			"Ignore": true
+		},
+		{
+			"ID": 501,
+			"Display": "First innings, home team",
+			"Ignore": true
+		},
+		{
+			"ID": 502,
+			"Display": "First innings, away team",
+			"Ignore": true
+		},
+		{
+			"ID": 503,
+			"Display": "Second innings, home team",
+			"Ignore": true
+		},
+		{
+			"ID": 504,
+			"Display": "Second innings, away team",
+			"Ignore": true
+		},
+		{
+			"ID": 505,
+			"Display": "Awaiting super over",
+			"Ignore": true
+		},
+		{
+			"ID": 506,
+			"Display": "Super over, home team",
+			"Ignore": true
+		},
+		{
+			"ID": 507,
+			"Display": "Super over, away team",
+			"Ignore": true
+		},
+		{
+			"ID": 508,
+			"Display": "After super over",
+			"Ignore": true
+		},
+		{
+			"ID": 509,
+			"Display": "Innings break",
+			"Ignore": true
+		},
+		{
+			"ID": 510,
+			"Display": "Super over break",
+			"Ignore": true
+		},
+		{
+			"ID": 511,
+			"Display": "Lunch break",
+			"Ignore": true
+		},
+		{
+			"ID": 512,
+			"Display": "Tea break",
+			"Ignore": true
+		},
+		{
+			"ID": 513,
+			"Display": "Stumps",
+			"Ignore": true
+		},
+		{
+			"ID": 531,
+			"Display": "1ST INNING",
+			"Ignore": false
+		},
+		{
+			"ID": 532,
+			"Display": "2ND INNING",
+			"Ignore": false
+		},
+		{
+			"ID": 533,
+			"Display": "3RD INNING",
+			"Ignore": false
+		},
+		{
+			"ID": 534,
+			"Display": "4TH INNING",
+			"Ignore": false
+		},
+		{
+			"ID": 535,
+			"Display": "5TH INNING",
+			"Ignore": false
+		},
+		{
+			"ID": 536,
+			"Display": "6TH INNING",
+			"Ignore": false
+		},
+		{
+			"ID": 537,
+			"Display": "7TH INNING",
+			"Ignore": false
+		},
+		{
+			"ID": 538,
+			"Display": "8TH INNING",
+			"Ignore": false
+		},
+		{
+			"ID": 539,
+			"Display": "9TH INNING",
+			"Ignore": false
+		}
+	]
+}

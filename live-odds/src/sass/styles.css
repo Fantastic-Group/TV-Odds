@@ -1,0 +1,656 @@
+﻿body {
+  margin: 0;
+  font-family: 'Roboto'; }
+
+live-odds .theme {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; }
+
+.hide {
+  display: none; }
+
+.show {
+  display: block; }
+
+.configuration-component {
+  padding: 0 20px; }
+
+body {
+  background-color: #EBEBEB; }
+
+.theme {
+  background-color: #EBEBEB;
+  font-family: 'Roboto';
+  padding: 0 10px;
+  color: #000; }
+
+.sport-icon {
+  height: 88px;
+  width: 88px;
+  margin-right: 5px;
+  display: inline-block;
+  background-color: #43247D; }
+
+h1 {
+  color: #43247D;
+  margin: 0;
+  font-size: 132px;
+  text-transform: uppercase; }
+
+h2 {
+  color: #666666;
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  font-size: 80px;
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: 500; }
+
+.matchup-time {
+  font-size: 50px;
+  font-weight: 400;
+  color: #43247D;
+  text-transform: uppercase;
+  vertical-align: middle; }
+
+h3 {
+  color: #43247D;
+  margin: 0;
+  font-size: 100px;
+  text-transform: uppercase; }
+
+.pages {
+  float: right;
+  font-size: 40px;
+  color: #43247D;
+  padding-top: 40px; }
+  .pages span {
+    font-size: 30px; }
+
+.prop-game {
+  margin-bottom: 50px; }
+  .prop-game .game-day {
+    margin-bottom: 0 !important; }
+  .prop-game h2 {
+    margin-bottom: 5px; }
+
+.props .odd {
+  width: 570px !important; }
+
+.props .sport-icon {
+  margin-right: 30px; }
+
+.odds-display {
+  width: 100%; }
+  .odds-display .odds-board {
+    table-layout: fixed; }
+    .odds-display .odds-board .name {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      display: block; }
+  .odds-display .game-day {
+    font-size: 110px;
+    background-color: #43247D;
+    margin-bottom: 15px;
+    font-weight: 500; }
+    .odds-display .game-day .date-time, .odds-display .game-day .prop-header-text {
+      background-color: #43247D;
+      color: #FDC930;
+      padding: 10px;
+      font-size: 80px;
+      text-transform: uppercase; }
+    .odds-display .game-day table {
+      border: 2px solid #43247D;
+      border-collapse: collapse;
+      width: 100%; }
+      .odds-display .game-day table.props-board {
+        margin-bottom: 0; }
+    .odds-display .game-day table {
+      border-collapse: initial;
+      border-spacing: 1px; }
+      .odds-display .game-day table thead tr th {
+        border: 0;
+        letter-spacing: normal !important; }
+      .odds-display .game-day table tbody tr td {
+        border: 0; }
+    .odds-display .game-day tbody {
+      border: 5px solid #43247D; }
+      .odds-display .game-day tbody tr, .odds-display .game-day tbody td {
+        border: 1px solid #43247D; }
+      .odds-display .game-day tbody .id, .odds-display .game-day tbody .odd, .odds-display .game-day tbody .time {
+        letter-spacing: -6px; }
+      .odds-display .game-day tbody .morespace {
+        font-size: 80%; }
+        .odds-display .game-day tbody .morespace.id {
+          font-size: 70%; }
+      .odds-display .game-day tbody .id {
+        background-color: #9E7AE2;
+        color: #fff; }
+      .odds-display .game-day tbody .even-row {
+        background-color: #fff;
+        color: #000; }
+      .odds-display .game-day tbody .odd-row {
+        background-color: #EEE3FF;
+        color: #000; }
+        .odds-display .game-day tbody .odd-row .id {
+          background-color: #7956BC; }
+      .odds-display .game-day tbody .time {
+        background-color: #5C35A4;
+        color: #fff; }
+        .odds-display .game-day tbody .time.changed {
+          color: #FDC930; }
+    .odds-display .game-day tr {
+      position: relative;
+      z-index: 1;
+      -webkit-column-break-inside: avoid;
+      -moz-column-break-inside: avoid;
+      -o-column-break-inside: avoid;
+      -ms-column-break-inside: avoid;
+      column-break-inside: avoid; }
+      .odds-display .game-day tr td {
+        padding: 10px;
+        text-align: center; }
+    .odds-display .game-day .id, .odds-display .game-day .time {
+      padding: 0;
+      text-align: center; }
+    .odds-display .game-day .odd {
+      width: 310px;
+      white-space: nowrap;
+      padding: 0; }
+      .odds-display .game-day .odd .sub-text {
+        display: none; }
+      .odds-display .game-day .odd .value {
+        text-align: center; }
+      .odds-display .game-day .odd .symbol {
+        padding-right: 10px; }
+      .odds-display .game-day .odd.show-juice {
+        text-align: left; }
+        .odds-display .game-day .odd.show-juice .sub-text {
+          display: inline-block;
+          font-size: 60px;
+          width: auto;
+          padding-left: 30px;
+          padding-top: 30px;
+          padding-right: 10px; }
+        .odds-display .game-day .odd.show-juice .value {
+          display: inline-block;
+          font-size: 110px;
+          padding-left: 10px; }
+        .odds-display .game-day .odd.show-juice .symbol {
+          font-size: 68px;
+          width: 54px;
+          display: inline-block;
+          padding: 0; }
+          .odds-display .game-day .odd.show-juice .symbol.sub {
+            font-size: 106px; }
+          .odds-display .game-day .odd.show-juice .symbol.plus {
+            font-size: 100px; }
+        .odds-display .game-day .odd.show-juice.overunder.morespace .value {
+          font-size: 96px;
+          padding-left: 0; }
+        .odds-display .game-day .odd.show-juice.overunder.morespace .symbol {
+          width: 42px;
+          font-size: 56px; }
+      .odds-display .game-day .odd .value {
+        text-align: center; }
+      .odds-display .game-day .odd.status {
+        white-space: normal !important; }
+    .odds-display .game-day .id {
+      width: 240px; }
+    .odds-display .game-day .time {
+      width: 140px;
+      font-size: 60px; }
+    .odds-display .game-day .name-col {
+      text-align: left;
+      width: 764px; }
+      .odds-display .game-day .name-col .sub-text {
+        display: block;
+        padding: 0;
+        text-align: left;
+        width: 100%; }
+      .odds-display .game-day .name-col .venuechange {
+        position: absolute;
+        z-index: 999999999999;
+        background-color: #7956BC;
+        color: #fff;
+        display: block;
+        margin-top: -27px;
+        margin-left: 0;
+        padding: 5px 10px;
+        font-size: 32px;
+        margin-right: 0; }
+      .odds-display .game-day .name-col.show-juice {
+        font-size: 74px;
+        width: 450px;
+        text-align: left; }
+    .odds-display .game-day .sub-text {
+      font-size: 40px;
+      color: #666666;
+      text-align: center;
+      width: 40%;
+      display: inline-block; }
+    .odds-display .game-day thead {
+      background-color: #FDC930; }
+      .odds-display .game-day thead th {
+        border: 0 solid #43247D;
+        color: #43247D;
+        text-transform: uppercase;
+        height: 88px;
+        text-align: center;
+        font-weight: 500;
+        font-size: 70px !important;
+        padding: 0 10px; }
+        .odds-display .game-day thead th.show-juice.odd {
+          text-align: center !important; }
+
+.horizontal {
+  max-height: 3840px; }
+
+.horizontal-display {
+  display: flex;
+  justify-content: space-between; }
+  .horizontal-display .col {
+    width: 1904px;
+    display: inline-block; }
+
+.mardigras body {
+  background-color: #000; }
+
+.mardigras .theme {
+  background-color: #000;
+  font-family: 'Roboto';
+  padding: 0 10px;
+  color: #fff; }
+
+.mardigras .sport-icon {
+  height: 88px;
+  width: 88px;
+  margin-right: 5px;
+  display: inline-block;
+  background-color: #FFCD4D; }
+
+.mardigras h1 {
+  color: #FFF;
+  margin: 0;
+  font-size: 132px;
+  text-transform: uppercase; }
+
+.mardigras h2 {
+  color: #FECC4D;
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  font-size: 80px;
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: 500; }
+
+.mardigras .matchup-time {
+  font-size: 50px;
+  font-weight: 400;
+  color: #FFF;
+  text-transform: uppercase;
+  vertical-align: middle; }
+
+.mardigras h3 {
+  color: #FFF;
+  margin: 0;
+  font-size: 100px;
+  text-transform: uppercase; }
+
+.mardigras .pages {
+  float: right;
+  font-size: 40px;
+  color: #FFCC4D;
+  padding-top: 40px; }
+  .mardigras .pages span {
+    font-size: 30px; }
+
+.mardigras .prop-game {
+  margin-bottom: 50px; }
+  .mardigras .prop-game .game-day {
+    margin-bottom: 0 !important; }
+  .mardigras .prop-game h2 {
+    margin-bottom: 5px; }
+
+.mardigras .props .odd {
+  width: 570px !important; }
+
+.mardigras .props .sport-icon {
+  margin-right: 30px; }
+
+.mardigras .odds-display {
+  width: 100%; }
+  .mardigras .odds-display .odds-board {
+    table-layout: fixed; }
+    .mardigras .odds-display .odds-board .name {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      display: block; }
+  .mardigras .odds-display .game-day {
+    font-size: 110px;
+    background-color: #521B65;
+    margin-bottom: 15px;
+    font-weight: 500; }
+    .mardigras .odds-display .game-day .date-time, .mardigras .odds-display .game-day .prop-header-text {
+      background-color: #521B65;
+      color: #FFCD4D;
+      padding: 10px;
+      font-size: 80px;
+      text-transform: uppercase; }
+    .mardigras .odds-display .game-day table {
+      border: 2px solid #521B65;
+      border-collapse: collapse;
+      width: 100%; }
+      .mardigras .odds-display .game-day table.props-board {
+        margin-bottom: 0; }
+    .mardigras .odds-display .game-day table {
+      border-collapse: initial;
+      border-spacing: 1px; }
+      .mardigras .odds-display .game-day table thead tr th {
+        border: 0;
+        letter-spacing: normal !important; }
+      .mardigras .odds-display .game-day table tbody tr td {
+        border: 0; }
+    .mardigras .odds-display .game-day tbody {
+      border: 5px solid #521B65; }
+      .mardigras .odds-display .game-day tbody tr, .mardigras .odds-display .game-day tbody td {
+        border: 1px solid #521B65; }
+      .mardigras .odds-display .game-day tbody .id, .mardigras .odds-display .game-day tbody .odd, .mardigras .odds-display .game-day tbody .time {
+        letter-spacing: -6px; }
+      .mardigras .odds-display .game-day tbody .morespace {
+        font-size: 80%; }
+        .mardigras .odds-display .game-day tbody .morespace.id {
+          font-size: 70%; }
+      .mardigras .odds-display .game-day tbody .id {
+        background-color: #535353;
+        color: #fff; }
+      .mardigras .odds-display .game-day tbody .even-row {
+        background-color: #fff;
+        color: #000; }
+      .mardigras .odds-display .game-day tbody .odd-row {
+        background-color: #FFF5DB;
+        color: #000; }
+        .mardigras .odds-display .game-day tbody .odd-row .id {
+          background-color: #747374; }
+      .mardigras .odds-display .game-day tbody .time {
+        background-color: #1B1B1B;
+        color: #fff; }
+        .mardigras .odds-display .game-day tbody .time.changed {
+          color: #FFCC4D; }
+    .mardigras .odds-display .game-day tr {
+      position: relative;
+      z-index: 1;
+      -webkit-column-break-inside: avoid;
+      -moz-column-break-inside: avoid;
+      -o-column-break-inside: avoid;
+      -ms-column-break-inside: avoid;
+      column-break-inside: avoid; }
+      .mardigras .odds-display .game-day tr td {
+        padding: 10px;
+        text-align: center; }
+    .mardigras .odds-display .game-day .id, .mardigras .odds-display .game-day .time {
+      padding: 0;
+      text-align: center; }
+    .mardigras .odds-display .game-day .odd {
+      width: 310px;
+      white-space: nowrap;
+      padding: 0; }
+      .mardigras .odds-display .game-day .odd .sub-text {
+        display: none; }
+      .mardigras .odds-display .game-day .odd .value {
+        text-align: center; }
+      .mardigras .odds-display .game-day .odd .symbol {
+        padding-right: 10px; }
+      .mardigras .odds-display .game-day .odd.show-juice {
+        text-align: left; }
+        .mardigras .odds-display .game-day .odd.show-juice .sub-text {
+          display: inline-block;
+          font-size: 60px;
+          width: auto;
+          padding-left: 30px;
+          padding-top: 30px;
+          padding-right: 10px; }
+        .mardigras .odds-display .game-day .odd.show-juice .value {
+          display: inline-block;
+          font-size: 110px;
+          padding-left: 10px; }
+        .mardigras .odds-display .game-day .odd.show-juice .symbol {
+          font-size: 68px;
+          width: 54px;
+          display: inline-block;
+          padding: 0; }
+          .mardigras .odds-display .game-day .odd.show-juice .symbol.sub {
+            font-size: 106px; }
+          .mardigras .odds-display .game-day .odd.show-juice .symbol.plus {
+            font-size: 100px; }
+        .mardigras .odds-display .game-day .odd.show-juice.overunder.morespace .value {
+          font-size: 96px;
+          padding-left: 0; }
+        .mardigras .odds-display .game-day .odd.show-juice.overunder.morespace .symbol {
+          width: 42px;
+          font-size: 56px; }
+      .mardigras .odds-display .game-day .odd .value {
+        text-align: center; }
+      .mardigras .odds-display .game-day .odd.status {
+        white-space: normal !important; }
+    .mardigras .odds-display .game-day .id {
+      width: 240px; }
+    .mardigras .odds-display .game-day .time {
+      width: 140px;
+      font-size: 60px; }
+    .mardigras .odds-display .game-day .name-col {
+      text-align: left;
+      width: 764px; }
+      .mardigras .odds-display .game-day .name-col .sub-text {
+        display: block;
+        padding: 0;
+        text-align: left;
+        width: 100%; }
+      .mardigras .odds-display .game-day .name-col .venuechange {
+        position: absolute;
+        z-index: 999999999999;
+        background-color: #535353;
+        color: #fff;
+        display: block;
+        margin-top: -27px;
+        margin-left: 0;
+        padding: 5px 10px;
+        font-size: 32px;
+        margin-right: 0; }
+      .mardigras .odds-display .game-day .name-col.show-juice {
+        font-size: 74px;
+        width: 450px;
+        text-align: left; }
+    .mardigras .odds-display .game-day .sub-text {
+      font-size: 40px;
+      color: #666666;
+      text-align: center;
+      width: 40%;
+      display: inline-block; }
+    .mardigras .odds-display .game-day thead {
+      background-color: #FFCC4D; }
+      .mardigras .odds-display .game-day thead th {
+        border: 0 solid #521B65;
+        color: #521B65;
+        text-transform: uppercase;
+        height: 88px;
+        text-align: center;
+        font-weight: 500;
+        font-size: 70px !important;
+        padding: 0 10px; }
+        .mardigras .odds-display .game-day thead th.show-juice.odd {
+          text-align: center !important; }
+
+.mardigras .horizontal {
+  max-height: 3840px; }
+
+.mardigras .horizontal-display {
+  display: flex;
+  justify-content: space-between; }
+  .mardigras .horizontal-display .col {
+    width: 1904px;
+    display: inline-block; }
+
+.hd-setting .theme {
+  padding: 0 5px; }
+
+.hd-setting .sport-icon {
+  height: 48px;
+  width: 48px;
+  margin-right: 0; }
+
+.hd-setting .props .odd {
+  width: 285px !important; }
+
+.hd-setting .props .sport-icon {
+  margin-right: 15px; }
+
+.hd-setting h1 {
+  font-size: 66px; }
+
+.hd-setting h2 {
+  margin-top: 0;
+  font-size: 40px;
+  margin-bottom: 0; }
+
+.hd-setting .matchup-time {
+  font-size: 25px; }
+
+.hd-setting h3 {
+  font-size: 50px; }
+
+.hd-setting .pages {
+  float: right;
+  font-size: 20px;
+  padding-top: 20px; }
+  .hd-setting .pages span {
+    font-size: 15px; }
+
+.hd-setting .prop-game {
+  margin-bottom: 25px; }
+  .hd-setting .prop-game h2 {
+    display: block; }
+
+.hd-setting .odds-display .game-day {
+  font-size: 55px;
+  font-weight: 500; }
+  .hd-setting .odds-display .game-day .date-time, .hd-setting .odds-display .game-day .prop-header-text {
+    padding: 5px;
+    font-size: 40px; }
+  .hd-setting .odds-display .game-day table {
+    border-width: 1px; }
+  .hd-setting .odds-display .game-day tbody .id, .hd-setting .odds-display .game-day tbody .odd, .hd-setting .odds-display .game-day tbody .time {
+    letter-spacing: -3px; }
+  .hd-setting .odds-display .game-day tr td {
+    padding: 0 5px; }
+  .hd-setting .odds-display .game-day .odd {
+    width: 155px;
+    white-space: nowrap;
+    padding: 0; }
+    .hd-setting .odds-display .game-day .odd .sub-text {
+      display: none; }
+    .hd-setting .odds-display .game-day .odd .symbol {
+      padding-right: 10px; }
+    .hd-setting .odds-display .game-day .odd.show-juice .sub-text {
+      font-size: 33px;
+      padding-top: 15px;
+      padding-right: 5px;
+      padding-left: 10px;
+      display: inline-block; }
+      .hd-setting .odds-display .game-day .odd.show-juice .sub-text.morespace {
+        font-size: 30px; }
+    .hd-setting .odds-display .game-day .odd.show-juice .value {
+      font-size: 55px;
+      padding-left: 5px; }
+    .hd-setting .odds-display .game-day .odd.show-juice .symbol {
+      font-size: 34px;
+      width: 27px;
+      display: inline-block;
+      padding: 0; }
+      .hd-setting .odds-display .game-day .odd.show-juice .symbol.sub {
+        font-size: 53px; }
+      .hd-setting .odds-display .game-day .odd.show-juice .symbol.plus {
+        font-size: 50px; }
+    .hd-setting .odds-display .game-day .odd.show-juice.overunder.morespace .value {
+      font-size: 48px;
+      padding-left: 0; }
+    .hd-setting .odds-display .game-day .odd.show-juice.overunder.morespace .symbol {
+      width: 21px;
+      font-size: 28px; }
+  .hd-setting .odds-display .game-day .id {
+    width: 120px; }
+  .hd-setting .odds-display .game-day .time {
+    /*width: 80px;*/
+    width: 70px;
+    font-size: 30px; }
+  .hd-setting .odds-display .game-day .name-col {
+    width: 382px; }
+    .hd-setting .odds-display .game-day .name-col.show-juice {
+      font-size: 37px;
+      width: 225px;
+      text-align: left; }
+    .hd-setting .odds-display .game-day .name-col .venuechange {
+      margin-top: -13.5px;
+      margin-left: 0;
+      padding: 2px 5px;
+      font-size: 16px;
+      margin-right: 0; }
+  .hd-setting .odds-display .game-day thead tr {
+    height: 44px; }
+    .hd-setting .odds-display .game-day thead tr th {
+      height: 44px;
+      font-size: 35px !important;
+      letter-spacing: 0 !important;
+      padding: 0 5px; }
+      .hd-setting .odds-display .game-day thead tr th.time {
+        font-size: 27px !important; }
+
+.hd-setting .horizontal {
+  max-height: 1080px; }
+
+.hd-setting .horizontal-display .col {
+  width: 952px; }
+
+.configuration-component .left-sec {
+  float: left; }
+
+.preview {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 99999999;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 1920px; }
+  .preview [live-odds] {
+    zoom: 80%;
+    position: absolute; }
+  .preview .close {
+    z-index: 9999999999999;
+    position: relative;
+    float: right;
+    height: 30px; }
+  .preview .live-odds-component {
+    top: 0;
+    right: 0;
+    left: 0; }
+    .preview .live-odds-component.settings4k {
+      zoom: 60%; }
+    .preview .live-odds-component.Vertical {
+      zoom: 80%;
+      width: 1080px;
+      left: 666px;
+      height: 1920px; }
+      .preview .live-odds-component.Vertical.settings4k {
+        width: 100%;
+        left: 0;
+        height: 4000px; }

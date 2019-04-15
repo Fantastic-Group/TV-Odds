@@ -1,0 +1,219 @@
+<!--VERTICAL-->
+<!--<div *ngFor="let game of games;">{{game.GameID}}</div>-->
+<div *ngIf="vertical">
+	<table class="odds-board" *ngFor="let game of games; let i = index">
+		<thead class="header" *ngIf="i == 0 && showHeader">
+			<tr>
+				<th class="time">Time</th>
+				<th class="id">Bet #</th>
+				<th class="name-col" [ngClass]="{'show-juice': this.league.overUnderShowJuice && this.league.spreadShowJuice}">Team</th>
+				<ng-container *ngFor="let item of this.sportSettings.getSport(this.sport).BetTypes">
+					<th class="odd {{item.BetType | lowercase}}" [ngClass]="{'show-juice' :  (((item.BetType | uppercase) == 'OVERUNDER') && this.league.overUnderShowJuice) || (((item.BetType | uppercase) == 'SPREAD') && this.league.spreadShowJuice)}">
+						{{item.Display}}
+					</th>
+				</ng-container>
+				<!--<th class="odd">{{this.sportSettings.getSport(this.sport).BetTypes[0].Display}}</th>
+				<th class="odd overunder" [ngClass]="{'show-juice' :this.league.overUnderShowJuice}">Total</th>
+				<th class="odd spread" [ngClass]="{'show-juice' : this.league.spreadShowJuice}">Spread</th>-->
+			</tr>
+		</thead>
+		<tbody>
+			<ng-container>
+				<tr [ngClass]="{ 'even-row' : (i % 2 == 0), 'odd-row' : (i % 2 != 0)}" *ngIf="game.STATUS == 1">
+					<td class="time" [ngClass]="{ 'changed' : hasGameTimeChanged(game) }" rowspan="2" *ngIf="(this.sport.SportName | uppercase) !== 'SOCCER'"><span>{{game.ActualDate | date:'h:mm' }}</span><br /><span>{{game.ActualDate | date:'aa' }}</span></td>
+					<td class="time" [ngClass]="{ 'changed' : hasGameTimeChanged(game) }" rowspan="3" *ngIf="(this.sport.SportName | uppercase) == 'SOCCER'"><span>{{game.ActualDate | date:'h:mm' }}</span><br /><span>{{game.ActualDate | date:'aa' }}</span></td>
+					<td class="id" [ngClass]="{'morespace' : game.AwayRotationNum > 9999}">{{game.AwayRotationNum > 0 ? (game.AwayRotationNum | number : '3.0-0' | noComma) : ''}}</td>
+					<td class="name-col" [ngClass]="{'show-juice': this.league.overUnderShowJuice && this.league.spreadShowJuice}"><span class="name"><span class="team">{{game.AwayTeamName}}</span><span class="sub-text" *ngIf="(this.sport.SportName | uppercase) == 'BASEBALL'">{{getTextFromComment(game, "apitcher")}}</span></span></td>
+					<ng-container *ngFor="let item of this.sportSettings.getSport(this.sport).BetTypes">
+						<td class="odd moneyline" [ngClass]="{ 'morespace' : this.getLine(game, false)?.BetForecastOdds > 9999 || this.getLine(game, false)?.BetForecastOdds < -9999 }" *ngIf="(item.BetType | uppercase) == 'MONEYLINE'">{{this.getLine(game, false)?.BetForecastOdds | moneyline | noComma }}</td>
+						
+						<td class="odd overunder" rowspan="2" *ngIf="(!this.league.overUnderShowJuice || (this.league.overUnderShowJuice && this.getOverUnder(game, false)?.BetForecastOdds == -110 && this.getOverUnder(game, true)?.BetForecastOdds == -110)) && (item.BetType | uppercase) == 'OVERUNDER'  ">{{this.getOverUnder(game, false)?.BetForecast_PARAM | overunder}}</td>
+						
+						<td class="odd overunder show-juice" [ngClass]="{'morespace' : (this.getOverUnder(game, false)?.BetForecast_PARAM | overunder) >= 10}" *ngIf="this.league.overUnderShowJuice && (item.BetType | uppercase) == 'OVERUNDER' && this.getOverUnder(game, false)?.BetForecastOdds !== -110 && this.getOverUnder(game, true)?.BetForecastOdds !== -110">
+							<span class="value"> <span class="symbol">O </span>{{this.getOverUnder(game, false)?.BetForecast_PARAM | overunder }}</span>
+							<span class="sub-text" [ngClass]="{'morespace': (this.getOverUnder(game, false)?.BetForecastOdds | juice | noComma) == 'EVEN'}" *ngIf="(this.getOverUnder(game, false)?.BetForecastOdds | juice | noComma) !== ''">{{this.getOverUnder(game, false)?.BetForecastOdds | juice | noComma }}</span>
+						</td>
+						
+						
+						<td class="odd spread" [ngClass]="{'show-juice' : this.league.spreadShowJuice}" *ngIf="(item.BetType | uppercase) == 'SPREAD'">
+							<span class="value" [innerHTML]="this.getSpread(game, false)?.BetForecast_PARAM | odds : this.getSpread(game, false)?.BetForecastOdds | noComma"></span>
+							<span class="sub-text" [ngClass]="{'morespace': (this.getSpread(game, false)?.BetForecastOdds | juice | noComma) == 'EVEN'}" *ngIf="(this.getSpread(game, false)?.BetForecastOdds | juice | noComma) !== ''">{{this.getSpread(game, false)?.BetForecastOdds | juice | noComma}}</span>
+						</td>
+					</ng-container>
+
+				</tr>
+				<tr [ngClass]="{ 'even-row' : i % 2 == 0, 'odd-row' : i % 2 != 0}" *ngIf="game.STATUS == 1">
+					<td class="id" [ngClass]="{'morespace' : game.HomeRotationNum > 9999}">{{game.HomeRotationNum > 0 ? (game.HomeRotationNum | number : '3.0-0' | noComma) : ''}}</td>
+					<td class="name-col" [ngClass]="{'show-juice': this.league.overUnderShowJuice && this.league.spreadShowJuice}">
+						<span class="venuechange" *ngIf="getTextFromComment(game, 'venue') != ''">GAME @ {{getTextFromComment(game, 'venue')}}</span>
+						<span class="name">
+							<span class="team">
+
+								{{game.HomeTeamName}}
+							</span>
+							<span class="sub-text" *ngIf="(this.sport.SportName | uppercase) == 'BASEBALL'">{{getTextFromComment(game, "hpitcher")}}</span>
+						</span>
+					</td>
+					<ng-container *ngFor="let item of this.sportSettings.getSport(this.sport).BetTypes">
+						<td class="odd moneyline" [ngClass]="{ 'morespace' : this.getLine(game, true)?.BetForecastOdds > 9999 || this.getLine(game, true)?.BetForecastOdds < -9999 }" *ngIf="(item.BetType | uppercase) == 'MONEYLINE'">
+							{{this.getLine(game, true)?.BetForecastOdds | moneyline | noComma}}
+						</td>
+						<td class="odd overunder show-juice" [ngClass]="{'morespace' : (this.getOverUnder(game, true)?.BetForecast_PARAM | overunder) >= 10}" *ngIf="this.league.overUnderShowJuice && (item.BetType | uppercase) == 'OVERUNDER' && this.getOverUnder(game, false)?.BetForecastOdds !== -110 && this.getOverUnder(game, true)?.BetForecastOdds !== -110">
+							<span class="value"><span class="symbol">U </span>{{this.getOverUnder(game, true)?.BetForecast_PARAM | overunder:false:false}}</span>
+							<span class="sub-text" [ngClass]="{'morespace': (this.getOverUnder(game, true)?.BetForecastOdds | juice | noComma) == 'EVEN'}" *ngIf="(this.getOverUnder(game, true)?.BetForecastOdds | juice | noComma) !== ''">{{this.getOverUnder(game, true)?.BetForecastOdds | juice | noComma}}</span>
+						</td>
+						<td class="odd spread" [ngClass]="{'show-juice' : this.league.spreadShowJuice}" *ngIf="(item.BetType | uppercase) == 'SPREAD'">
+							<span class="value" [innerHTML]="this.getSpread(game, true)?.BetForecast_PARAM | odds : this.getSpread(game, true)?.BetForecastOdds | noComma"></span>
+							<span class="sub-text" [ngClass]="{'morespace': (this.getSpread(game, true)?.BetForecastOdds | juice | noComma) == 'EVEN'}" *ngIf="(this.getSpread(game, true)?.BetForecastOdds | juice | noComma) !== ''">{{this.getSpread(game, true)?.BetForecastOdds | juice | noComma}}</span>
+						</td>
+					</ng-container>
+				</tr>
+				<tr [ngClass]="{ 'even-row' : (i % 2 == 0), 'odd-row' : (i % 2 != 0)}" *ngIf="game.STATUS == 1 && (this.sport.SportName | uppercase) == 'SOCCER'">
+
+					<td class="id"></td>
+					<td class="name-col" [ngClass]="{'show-juice': this.league.overUnderShowJuice && this.league.spreadShowJuice}"><span class="name"><span class="team">Draw</span></span></td>
+					<ng-container *ngFor="let item of this.sportSettings.getSport(this.sport).BetTypes">
+						<td class="odd moneyline" *ngIf="(item.BetType | uppercase) == 'MONEYLINE'">{{this.getLine(game, false, true)?.BetForecastOdds | moneyline | noComma}}</td>
+						<td class="odd spread" [ngClass]="{'show-juice' : this.league.spreadShowJuice}" *ngIf="(item.BetType | uppercase) == 'SPREAD'"></td>
+						<td class="odd spread" [ngClass]="{'show-juice' : this.league.spreadShowJuice}" *ngIf="(item.BetType | uppercase) == 'OVERUNDER'"></td>
+					</ng-container>
+
+
+				</tr>
+
+				<!--GAME IS LIVE-->
+				<tr [ngClass]="{ 'even-row' : (i % 2 == 0), 'odd-row' : (i % 2 != 0)}" *ngIf="game.STATUS > 1 ">
+					<td class="time" [innerHTML]="(this.getSpread(game, false)?.BetForecast_PARAM && this.getSpread(game, false)?.BetForecast_PARAM <= 0 ? (this.getSpread(game, false)?.BetForecast_PARAM | odds : this.getSpread(game, false)?.BetForecastOdds) : this.getOverUnder(game, false)?.BetForecast_PARAM |overunder )"></td>
+					
+					<td class="id" [ngClass]="{'morespace' : game.AwayRotationNum > 9999}">{{game.AwayRotationNum > 0 ? (game.AwayRotationNum | number : '3.0-0' | noComma) : ''}}</td>
+					<td class="name-col" [ngClass]="{'show-juice': this.league.overUnderShowJuice && this.league.spreadShowJuice}"><span class="name"><span class="team">{{game.AwayTeamName}}</span><span class="sub-text" *ngIf="(this.sport.SportName | uppercase) == 'BASEBALL'">{{getTextFromComment(game, "apitcher")}}</span></span></td>
+					
+					<td class="odd moneyline"></td>
+
+					<td class="odd overunder status" rowspan="2" >
+						{{getGameStatus(game.STATUS, game.BRStatus, league)}} <!--GAME TIME-->
+					</td>
+
+
+					<td class="odd spread">
+						{{getGameStatus(game.STATUS, game.BRStatus,league) == 'IN PLAY' ? '' : game.AwayTeamScore}} <!--AWAY SCORE-->
+					</td>
+				</tr>
+				<tr [ngClass]="{ 'even-row' : i % 2 == 0, 'odd-row' : i % 2 != 0}" *ngIf="game.STATUS > 1">
+					<td class="time" [innerHTML]="(this.getSpread(game, true)?.BetForecast_PARAM <= 0 ? (this.getSpread(game, true)?.BetForecast_PARAM | odds : this.getSpread(game, true)?.BetForecastOdds) : this.getOverUnder(game, true)?.BetForecast_PARAM | overunder )"></td>
+					
+					<td class="id" [ngClass]="{'morespace' : game.AwayRotationNum > 9999}">{{game.HomeRotationNum > 0 ? (game.HomeRotationNum | number : '3.0-0' | noComma) : ''}}</td>
+					<td class="name-col" [ngClass]="{'show-juice': this.league.overUnderShowJuice && this.league.spreadShowJuice}">
+						<span class="name">
+							<span class="team">{{game.HomeTeamName}}{{getTextFromComment(game, "hpitcher")}}</span>
+							<span class="sub-text" *ngIf="(this.sport.SportName | uppercase) == 'BASEBALL'">{{getTextFromComment(game, "hpitcher")}}</span>
+						</span>
+					</td>
+
+					<td class="odd moneyline"></td>
+
+					
+					<td class="odd spread">
+						{{getGameStatus(game.STATUS, game.BRStatus,league) == 'IN PLAY' ? '' : game.HomeTeamScore}} <!--AWAY SCORE-->
+					</td>
+				</tr>
+				<!--<tr [ngClass]="{ 'even-row' : (i % 2 == 0), 'odd-row' : (i % 2 != 0)}" *ngIf="game.STATUS > 1 && (this.sport.SportName | uppercase) == 'SOCCER'">
+					<td class="time">{{this.getLine(game, false, true)?.BetForecastOdds | juice }}</td>
+					<td class="id"></td>
+					<td class="name-col" [ngClass]="{'show-juice': this.league.overUnderShowJuice && this.league.spreadShowJuice}"><span class="name"><span class="team">Draw</span></span></td>
+					<ng-container *ngFor="let item of this.sportSettings.getSport(this.sport).BetTypes">
+						<td class="odd moneyline" *ngIf="(item.BetType | uppercase) == 'MONEYLINE'"></td>
+						<td class="odd spread" [ngClass]="{'show-juice' : this.league.spreadShowJuice}" *ngIf="(item.BetType | uppercase) == 'OVERUNDER'"></td>
+						<td class="odd spread" [ngClass]="{'show-juice' : this.league.spreadShowJuice}" *ngIf="(item.BetType | uppercase) == 'OVERUNDER'"></td>
+					</ng-container>
+
+
+				</tr>-->
+			</ng-container>
+		</tbody>
+	</table>
+</div>
+
+<!--HORIZONTAL-->
+<div *ngIf="!vertical">
+	<table class="odds-board" *ngFor="let game of games; let i = index">
+		<thead class="header" *ngIf="i == 0 && showHeader">
+			<tr>
+				<th class="time">Time</th>
+				<th class="id">Bet #</th>
+				<th class="name-col">Team</th>
+				<th class="odd">PS/Tot</th>
+				<th class="odd">Money</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr [ngClass]="{ 'even-row' : (i % 2 == 0), 'odd-row' : (i % 2 != 0)}" *ngIf="game.STATUS == 1">
+				<td class="time" [attr.rowspan]=" (this.sport.SportName | uppercase) == 'SOCCER' ? 3 : 2" [ngClass]="{ 'changed' : hasGameTimeChanged(game) }"><span>{{game.ActualDate | date:'h:mm' }}</span><br /><span>{{game.ActualDate | date:'aa' }}</span></td>
+				<td class="id" [ngClass]="{'morespace' : game.AwayRotationNum > 9999}">{{game.AwayRotationNum > 0 ? (game.AwayRotationNum | number : '3.0-0') : ''}}</td>
+				<td class="name-col">
+					<span class="name">
+						<span class="team">{{game.AwayTeamName}}</span>
+						<span class="sub-text" *ngIf="(this.sport.SportName | uppercase) == 'BASEBALL'">{{getTextFromComment(game, "apitcher")}}</span>
+					</span>
+				</td>
+				<td class="odd overunder">{{ this.getSpread(game, false)?.BetForecast_PARAM !== null && this.getSpread(game, false)?.BetForecast_PARAM <= 0 ? (this.getSpread(game, false)?.BetForecast_PARAM | odds : this.getSpread(game, false)?.BetForecastOdds) : (this.getOverUnder(game, false)?.BetForecast_PARAM | overunder) }}</td>
+				<td class="odd moneyline" [ngClass]="{ 'morespace' : this.getLine(game, false)?.BetForecastOdds > 9999 || this.getLine(game, false)?.BetForecastOdds < -9999 }">{{this.getLine(game, false)?.BetForecastOdds | moneyline | noComma}}</td>
+
+			</tr>
+			<tr [ngClass]="{ 'even-row' : i % 2 == 0, 'odd-row' : i % 2 != 0}" *ngIf="game.STATUS == 1">
+				<td class="id" [ngClass]="{'morespace' : game.AwayRotationNum > 9999}">{{game.HomeRotationNum > 0 ? (game.HomeRotationNum | number : '3.0-0' | noComma) : ''}}</td>
+				<td class="name-col">
+					<span class="venuechange" *ngIf="getTextFromComment(game, 'venue') != ''">GAME @ {{getTextFromComment(game, 'venue')}}</span>
+					<span class="name">
+						<span class="team">{{game.HomeTeamName}}</span>
+						<span class="sub-text" *ngIf="(this.sport.SportName | uppercase) == 'BASEBALL'">{{getTextFromComment(game, "hpitcher")}}</span>
+					</span>
+				</td>
+
+				<td class="odd overunder">{{ this.getSpread(game, true)?.BetForecast_PARAM <= 0 ? (this.getSpread(game, true)?.BetForecast_PARAM | odds : this.getSpread(game, true)?.BetForecastOdds) : (this.getOverUnder(game, true)?.BetForecast_PARAM | overunder) }}</td>
+				<td class="odd moneyline" [ngClass]="{ 'morespace' : this.getLine(game, true)?.BetForecastOdds > 9999 || this.getLine(game, true)?.BetForecastOdds < -9999 }">{{this.getLine(game, true)?.BetForecastOdds | moneyline | noComma}}</td>
+
+
+			</tr>
+			<tr [ngClass]="{ 'even-row' : (i % 2 == 0), 'odd-row' : (i % 2 != 0)}" *ngIf="game.STATUS == 1 && (this.sport.SportName | uppercase) == 'SOCCER'">
+				<td class="id" [ngClass]="{'morespace' : game.AwayRotationNum > 9999}"></td>
+				<td class="name-col"><span class="name"><span class="team">Draw</span></span></td>
+				<td>&nbsp;</td>
+				<ng-container *ngFor="let item of this.sportSettings.getSport(this.sport).BetTypes">
+					<td class="odd moneyline" [ngClass]="{ 'morespace' : this.getLine(game, false, true)?.BetForecastOdds > 9999 || this.getLine(game, false, true)?.BetForecastOdds < -9999 }" *ngIf="(item.BetType | uppercase) == 'MONEYLINE'">{{this.getLine(game, false, true)?.BetForecastOdds | moneyline | noComma}}</td>
+				</ng-container>
+			</tr>
+
+			<tr [ngClass]="{ 'even-row' : (i % 2 == 0), 'odd-row' : (i % 2 != 0)}" *ngIf="game.STATUS > 1">
+				<td class="time">{{ this.getSpread(game, false)?.BetForecast_PARAM <= 0 ? (this.getSpread(game, false)?.BetForecast_PARAM | odds : this.getSpread(game, false)?.BetForecastOdds) : this.getOverUnder(game, false)?.BetForecast_PARAM |overunder }}</td>
+				
+				<td class="id" [ngClass]="{'morespace' : game.AwayRotationNum > 9999}">{{game.AwayRotationNum > 0 ? (game.AwayRotationNum | number : '3.0-0' | noComma) : ''}}</td>
+				<td class="name-col"><span class="name"><span class="team">{{game.AwayTeamName}}</span></span></td>
+				<td class="odd overunder status" [attr.rowspan]="(this.sport.SportName | uppercase) == 'SOCCER' ? 3 : 2">{{getGameStatus(game.STATUS, game.BRStatus, league)}} <!--GAME TIME--></td>
+				<td class="odd moneyline">{{getGameStatus(game.STATUS, game.BRStatus,league) == 'IN PLAY' ? '' : game.AwayTeamScore}} <!--AWAY SCORE--></td>
+
+			</tr>
+			<tr [ngClass]="{ 'even-row' : i % 2 == 0, 'odd-row' : i % 2 != 0}" *ngIf="game.STATUS > 1">
+				<td class="time">{{(this.getSpread(game, true)?.BetForecast_PARAM <= 0 ? (this.getSpread(game, true)?.BetForecast_PARAM | odds : this.getSpread(game, true)?.BetForecastOdds) : this.getOverUnder(game, true)?.BetForecast_PARAM | overunder)}}</td>
+				
+				<td class="id" [ngClass]="{'morespace' : game.AwayRotationNum > 9999}">{{game.HomeRotationNum > 0 ? (game.HomeRotationNum | number : '3.0-0' | noComma) : ''}}</td>
+				<td class="name-col"><span class="name"><span class="team">{{game.HomeTeamName}}</span></span></td>
+
+
+				<td class="odd moneyline">{{getGameStatus(game.STATUS, game.BRStatus,league) == 'IN PLAY' ? '' : game.HomeTeamScore}} <!--HOME SCORE--></td>
+
+
+			</tr>
+			<tr [ngClass]="{ 'even-row' : (i % 2 == 0), 'odd-row' : (i % 2 != 0)}" *ngIf="game.STATUS > 1 && (this.sport.SportName | uppercase) == 'SOCCER'">
+				<td class="time"><!--{{this.getLine(game, false, true)?.BetForecastOdds | odds : this.getSpread(game, true)?.BetForecastOdds }}--></td>
+				<td class="id"></td>
+				
+				<td class="name-col"><span class="name"><span class="team">Draw</span></span></td>
+				<ng-container *ngFor="let item of this.sportSettings.getSport(this.sport).BetTypes">
+					<td class="odd moneyline" *ngIf="(item.BetType | uppercase) == 'MONEYLINE'"></td>
+				</ng-container>
+			</tr>
+		</tbody>
+	</table>
+</div>

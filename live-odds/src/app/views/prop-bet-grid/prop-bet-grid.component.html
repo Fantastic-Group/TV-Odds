@@ -1,0 +1,65 @@
+<div class="props">
+	<div *ngIf="!futures">
+		<h1 *ngIf="vertical">
+			<span class="sport-icon" [ngStyle]="{'-webkit-mask-box-image': 'url(./assets/imgs/icon_' + (sport.SportName | lowercase) + '.png)', 'mask-image':'url(./assets/imgs/' + (hd ? 'hd/' : '') + 'icon_' + (sport.SportName | lowercase) + '.png)'}"></span>{{league.header ? league.header : league.league.LeagueNameAbbreviation }} PROPS
+		</h1>
+		<div *ngFor="let selectedGame of games" class="prop-game">
+
+			<h2>{{selectedGame.game.AwayTeamName}} @ {{selectedGame.game.HomeTeamName}}<span class="matchup-time"> - {{selectedGame.game.ActualDate | date:'MMMM d, yyyy - h:mm a'}}</span></h2>
+
+
+
+			<div *ngFor="let props of getPropBets(selectedGame) | groupBy: 'BetName'" class="game-day">
+				<div class="prop-header-text">{{this.getBetName(props.key, selectedGame.game)}}</div>
+				<table class="odds-board props-board">
+					<tr *ngFor="let bet of props.value; let i = index" [ngClass]="{ 'even-row' : i%2 == 0, 'odd-row' : i%2 != 0}">
+
+						<!--NOTE: USING BET END DATE INSTEAD OF GAME DATE-->
+						<!--<td *ngIf="i == 0" [rowSpan]="props.value.length" class="time"><span>{{bet.BetEndDate | date:'h:mm' }}</span><br /><span>{{bet.BetEndDate | date:'aa' }}</span></td>-->
+						<td class="id" *ngIf="selectedGame.game.STATUS == 1">&nbsp;</td>
+						<td class="id" *ngIf="props.value.length < 10 && selectedGame.game.STATUS > 1">{{bet.BetForecastOdds | juice | noComma}}</td>
+						<td class="id" *ngIf="props.value.length >= 10 && selectedGame.game.STATUS > 1">{{this.fraction(bet.BetForecastOdds)}}</td>
+						<td class="name-col">
+							{{this.getBetDescription(bet, selectedGame.game, props.key)}}
+						</td>
+						<td class="odd" *ngIf="props.value.length < 10 && selectedGame.game.STATUS == 1">{{bet.BetForecastOdds | juice | noComma}}</td>
+						<td class="odd" *ngIf="props.value.length >= 10 && selectedGame.game.STATUS == 1">{{this.fraction(bet.BetForecastOdds)}}</td>
+						<td class="odd" *ngIf="selectedGame.game.STATUS > 1">&nbsp;</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div *ngIf="futures">
+		<div *ngFor="let selectedGame of games" class="prop-game">
+			<h1 *ngIf="vertical"><span class="sport-icon" [ngStyle]="{'-webkit-mask-box-image': 'url(./assets/imgs/icon_' + (sport.SportName | lowercase) + '.png)', 'mask-image':'url(./assets/imgs/' + (hd ? 'hd/' : '') + 'icon_' + (sport.SportName | lowercase) + '.png)'}"></span>{{league.header ? league.header : league.league.LeagueNameAbbreviation }}</h1>
+			<h2 *ngIf="league.subHeader">{{league.subHeader }} </h2>
+			<div *ngFor="let props of getPropBets(selectedGame) | groupBy: 'BetName'" class="game-day">
+				<div class="prop-header-text">{{this.getBetName(props.key, selectedGame.game)}}</div>
+				<table class="odds-board props-board">
+					<thead class="header">
+						<tr>
+							<!--<th class="id">Bet #</th>-->
+							<th class="name-col">Team</th>
+							<th class="odd">Odds</th>
+
+						</tr>
+					</thead>
+					<tr *ngFor="let bet of props.value; let i = index" [ngClass]="{ 'even-row' : i%2 == 0, 'odd-row' : i%2 != 0}">
+
+						<!--NOTE: USING BET END DATE INSTEAD OF GAME DATE-->
+						<!--<td *ngIf="i == 0" [rowSpan]="props.value.length" class="time"><span>{{bet.BetEndDate | date:'h:mm' }}</span><br /><span>{{bet.BetEndDate | date:'aa' }}</span></td>-->
+						<!--<td class="id" *ngIf="selectedGame.game.STATUS == 1">&nbsp;</td>-->
+						<td class="id" *ngIf="selectedGame.game.STATUS > 1">{{this.fraction(bet.BetForecastOdds)}}</td>
+						<td class="name-col">
+							{{this.getBetDescription(bet, selectedGame.game)}}
+						</td>
+						<td class="odd" *ngIf="selectedGame.game.STATUS == 1">{{this.fraction(bet.BetForecastOdds)}}</td>
+						<!--<td class="odd" *ngIf="selectedGame.game.STATUS > 1">&nbsp;</td>-->
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

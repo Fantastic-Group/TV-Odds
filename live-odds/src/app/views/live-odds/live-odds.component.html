@@ -1,0 +1,52 @@
+<div class="{{getCasino()}}" [ngClass]="{'hd-setting': this.oddsDisplay?.HDDisplay}">
+	<div class="theme">
+		<div *ngIf="this.oddsDisplay == null || this.oddsDisplay.sports.length == 0">
+			Stay tuned for today's odds!
+		</div>
+
+        <div *ngIf="this.oddsDisplay != null && this.oddsDisplay.sports.length > 0">
+            <div *ngIf="this.oddsDisplay.sports.length > 0" class="pages">
+                {{this.currentPage }} <span>of</span> {{this.totalPages}}
+            </div>
+            <div class="odds-display">
+				<h1 *ngIf="!this.hasProps(league)">
+					<span class="sport-icon" [ngStyle]="{'-webkit-mask-box-image': 'url(./assets/imgs/icon_' + (sport.sport.SportName | lowercase) + '.png)', 'mask-image':'url(./assets/imgs/' + (this.oddsDisplay?.HDDisplay ? 'hd/' : '') + 'icon_' + (sport.sport.SportName | lowercase) + '.png)'}"></span>
+					{{league.header ? league.header : league.league.LeagueNameAbbreviation}}
+					<h2 *ngIf="league?.subHeader && !this.hasProps(league)">- {{league.subHeader }}</h2>
+				</h1>
+                
+                <div *ngIf="!this.isHorizontalDisplay()">
+                    <div *ngIf="this.hasStandard(league)">
+                        <div *ngFor="let item of getGamesForColumn(sport, league, 1) | groupBy:'DisplayDate'; let i = index" class="game-day">
+
+							<div class="date-time">{{item.key | date : 'fullDate' }}</div>
+                            <app-standard-bet-grid [sport]="sport.sport" [league]="league" [games]="item.value" [showHeader]="i == 0" [vertical]="true"> </app-standard-bet-grid>
+                        </div>
+                    </div>
+                    <div *ngIf="this.hasProps(league)" class="">
+                        <app-prop-bet-grid [sport]="sport.sport" [league]="league" [games]="getPropBetsForColumn(league, 1, league.futures)" [vertical]="true" [futures]="league.futures" [hd]="this.oddsDisplay?.HDDisplay"></app-prop-bet-grid>
+                    </div>
+                </div>
+                <div *ngIf="this.isHorizontalDisplay()">
+					<h1 *ngIf="this.hasProps(league)" class="full-width">
+						<span class="sport-icon" [ngStyle]="{'-webkit-mask-box-image': 'url(./assets/imgs/icon_' + (sport.sport.SportName | lowercase) + '.png)', 'mask-image':'url(./assets/imgs/' + (this.oddsDisplay?.HDDisplay ? 'hd/' : '') + 'icon_' + (sport.sport.SportName | lowercase) + '.png)'}"></span>
+						{{league.header ? league.header : league.league.LeagueNameAbbreviation}} PROPS 
+					</h1>
+                    <div class="horizontal-display">
+                        <div *ngFor="let col of columns" class="col">
+                            <div *ngIf="this.hasStandard(league)">
+                                <div *ngFor="let item of getGamesForColumn(sport, league, col) | groupBy: 'DisplayDate'; let i = index" class="game-day">
+									<div class="date-time">{{item.key | date : 'fullDate' }}</div>
+                                    <app-standard-bet-grid [sport]="sport.sport" [league]="league" [games]="item.value" [showHeader]="i == 0" [vertical]="false"> </app-standard-bet-grid>
+                                </div>
+                            </div>
+                            <div *ngIf="this.hasProps(league)" class="">
+                                <app-prop-bet-grid [sport]="sport.sport" [league]="league" [games]="getPropBetsForColumn(league, col, league.futures)" [vertical]="false" [futures]="league.futures" [hd]="this.oddsDisplay?.HDDisplay"></app-prop-bet-grid>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

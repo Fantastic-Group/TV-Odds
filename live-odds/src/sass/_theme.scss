@@ -1,0 +1,35 @@
+﻿
+
+
+.mardigras{
+	@include theme(
+$colors: ( 
+	primary:#521B65,
+	secondary:#fff,
+	betnum-bg:#535353 ,
+	betnum-bg-odd:#747374,
+	betnum-text:#fff,
+	game-alert-bg:#535353,
+	game-alert-text:#fff,
+	game-date-bg:#521B65,
+	game-date-text:#FFCD4D ,
+	game-time-bg:#1B1B1B,
+	game-time-change:#FFCC4D ,
+	game-time-text:#fff,
+	h1:#FFF,
+	h2: #FECC4D,
+	icon-color:#FFCD4D,
+	juice-text:#666666,
+	page-bg: #000,
+	page-number-text: #FFCC4D,
+	row-even-bg:#fff,
+	row-odd-bg:#FFF5DB,
+	row-text:#000,
+	table-border:#521B65, /*5px*/
+	table-header-bg:#FFCC4D,
+	table-header-text: #521B65,
+	error: #f00
+	));
+	
+}
+
